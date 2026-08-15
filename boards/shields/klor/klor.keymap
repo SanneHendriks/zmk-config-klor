@@ -6,50 +6,6 @@
 #define FN   1
 
 / {
-    macros {
-        rgb_off: rgb_off {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_OFF>;
-        };
-
-        rgb_on: rgb_on {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_ON>;
-        };
-
-        rgb_brd: rgb_brd {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_BRD>;
-        };
-
-        rgb_bri: rgb_bri {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&rgb_ug RGB_ON>, <&rgb_ug RGB_BRI>;
-        };
-    };
-
-    behaviors {
-        rgb_brd_or_off: rgb_brd_or_off {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <250>;
-            bindings = <&rgb_off>, <&rgb_brd>;
-        };
-
-        rgb_bri_or_on: rgb_bri_or_on {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <250>;
-            bindings = <&rgb_on>, <&rgb_bri>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
@@ -70,7 +26,7 @@
               &kp Q     &kp W     &kp E     &kp R     &kp T          &kp Y     &kp U     &kp I     &kp O     &kp P
     &kp LSHFT &kp A     &kp S     &kp D     &kp F     &kp G          &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp RSHFT
     &kp LCMD  &kp Z     &kp X     &kp C     &kp V     &kp B          &kp K     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RCMD
-                                  &kp ESC   &kp SPACE &kp TAB        &kp RET   &kp BSPC  &mo FN
+                                  &kp ESC   &kp SPACE &kp TAB        &kp RET   &kp BSPC  &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN UP &inc_dec_kp LEFT RIGHT>;
@@ -79,10 +35,11 @@
         fn_layer {
             label = "FN";
             bindings = <
-              &trans    &trans    &trans    &trans    &trans        &trans    &trans    &rgb_brd_or_off 0 0 &rgb_bri_or_on 0 0 &trans
-    &trans    &trans    &trans    &trans    &trans    &trans        &trans    &trans    &trans          &trans          &trans          &trans
-    &trans    &trans    &trans    &trans    &trans    &trans        &trans    &trans    &trans          &trans          &trans          &trans
-                                  &trans    &trans    &trans        &trans    &trans    &trans
+// │         │         │         │         │         │         │    │         │         │         │         │         │         │
+              &trans    &trans    &trans    &trans    &trans         &trans    &trans    &trans    &trans    &trans
+    &trans    &trans    &trans    &trans    &trans    &trans         &trans    &trans    &trans    &trans    &trans    &trans
+    &trans    &trans    &trans    &trans    &trans    &trans         &trans    &trans    &trans    &trans    &trans    &trans
+                                  &trans    &trans    &trans         &trans    &trans    &trans
             >;
         };
     };
