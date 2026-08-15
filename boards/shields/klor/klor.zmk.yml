@@ -1,0 +1,18 @@
+file_format: "1"
+id: klor
+name: KLOR
+type: shield
+
+url: https://example.com
+
+features:
+  - keys
+  - encoder
+  - underglow
+
+requires:
+  - pro_micro
+
+siblings:
+  - klor_left
+  - klor_right
