@@ -13,7 +13,7 @@
             bindings = <&rgb_ug RGB_OFF>;
         };
 
-        rgb_off: rgb_on {
+        rgb_on: rgb_on {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&rgb_ug RGB_ON>;
