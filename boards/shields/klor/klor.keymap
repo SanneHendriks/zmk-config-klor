@@ -1,45 +1,127 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/rgb.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/pointing.h>
 
-#define BASE 0
-#define FN   1
+#define BASE  0
+#define NAV   1
+#define MOUSE 2
+#define NUM   3
+#define SYM   4
+#define FUN   5
+#define LOCK  6
 
 / {
+    macros {
+        siri: siri {
+            compatible = "zmk,behavior-macro";
+            tap-ms = <1000>;
+            #binding-cells = <0>;
+            bindings = <&kp LG(SPACE)>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
-            label = "BASE";
-/*           ┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
-             │    Q    │    W    │    E    │    R    │    T    │    │    Y    │    U    │    I    │    O    │    P    │
-   ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
-   │  SHIFT  │    A    │    S    │    D    │    F    │    G    │    │    H    │    J    │    K    │    L    │    ;    │  SHIFT  │
-   ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-   │   CMD   │    Z    │    X    │    C    │    V    │    B    │    │    N    │    M    │    ,    │    .    │    /    │   CMD   │
-   └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
-                                 │   ESC   │  SPACE  │   TAB   │    │  ENTER  │  BSPCE  │   DEL   │
-                                 └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘ */
+        base_layer {
             bindings = <
-// │         │         │         │         │         │         │    │         │         │         │         │         │         │
-
+//           ┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
               &kp Q     &kp W     &kp E     &kp R     &kp T          &kp Y     &kp U     &kp I     &kp O     &kp P
-    &kp LSHFT &kp A     &kp S     &kp D     &kp F     &kp G          &kp H     &kp J     &kp K     &kp L     &kp SEMI  &kp RSHFT
+// ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+    &kp LSHFT &kp A &mt LCTRL S &mt LALT D &mt LCMD F &kp G          &kp H &mt RCMD J &mt RALT K &mt RCTRL L &kp SEMI  &kp RSHFT
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
     &kp LCMD  &kp Z     &kp X     &kp C     &kp V     &kp B          &kp K     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RCMD
-                                  &kp ESC   &kp SPACE &kp TAB        &kp RET   &kp BSPC  &rgb_ug RGB_ON
+// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                        &lt FUN ESC &lt NAV SPACE &lt MOUSE TAB      &lt SYM RET &lt NUM BSPC &lt FUN DEL
+//                               └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
             >;
 
-            sensor-bindings = <&inc_dec_kp DOWN UP &inc_dec_kp LEFT RIGHT>;
+            sensor-bindings = <&inc_dec_kp DOWN UP &inc_dec_kp RIGHT LEFT>;
         };
 
-        fn_layer {
-            label = "FN";
+        nav_layer {
             bindings = <
-// │         │         │         │         │         │         │    │         │         │         │         │         │         │
-              &trans    &trans    &trans    &trans    &trans         &trans    &trans    &trans    &trans    &trans
-    &trans    &trans    &trans    &trans    &trans    &trans         &trans    &trans    &trans    &trans    &trans    &trans
-    &trans    &trans    &trans    &trans    &trans    &trans         &trans    &trans    &trans    &trans    &trans    &trans
-                                  &trans    &trans    &trans         &trans    &trans    &trans
+//           ┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+              &none     &none     &none     &none     &none      &kp RG(RS(Z)) &kp RG(V) &kp RG(C) &kp RG(X) &kp RG(Z)
+// ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+    &trans    &none     &kp LCTRL &kp LALT  &kp LCMD  &none          &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &caps_word &trans
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+    &trans    &none     &none     &none     &none     &none          &kp HOME  &kp PG_DN &kp PG_UP &kp END   &kp INS   &trans
+// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                  &none     &to BASE  &none          &trans    &trans    &trans
+//                               └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+        mouse_layer {
+            bindings = <
+//           ┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+              &none     &none     &none     &none     &none          &mkp MB5  &kp RG(V) &kp RG(C) &kp RG(X) &mkp MB4
+// ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+    &trans    &none     &kp LCTRL &kp LALT  &kp LCMD  &none &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &none &trans
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+    &trans    &none     &none     &none     &none     &none &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none &trans
+// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                  &none     &none     &to BASE       &mkp MB2  &mkp MB1  &mkp MB3
+//                               └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+        num_layer {
+            bindings = <
+//           ┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+              &kp LBKT  &kp N7    &kp N8    &kp N9    &kp RBKT       &none     &none     &none     &none     &none
+// ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+    &trans    &kp SQT   &kp N4    &kp N5    &kp N6    &kp EQUAL      &none     &kp RCMD  &kp RALT  &kp RCTRL &none     &trans
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+    &trans    &kp GRAVE &kp N1    &kp N2    &kp N3    &kp BSLH       &none     &none     &none     &none     &none     &trans
+// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                  &kp DOT   &kp N0    &kp MINUS      &none     &to BASE  &none
+//                               └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+        sym_layer {
+            bindings = <
+//           ┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+              &kp LBRC  &kp AMPS  &kp ASTRK &kp LPAR  &kp RBRC       &none     &none     &none     &none     &none
+// ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+    &trans    &kp DQT   &kp DLLR  &kp PRCNT &kp CARET &kp PLUS       &none     &kp RCMD  &kp RALT  &kp RCTRL &none     &trans
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+    &trans    &kp TILDE &kp EXCL  &kp AT    &kp HASH  &kp PIPE       &none     &none     &none     &none     &none     &trans
+// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                  &kp LPAR  &kp RPAR  &kp UNDER      &to BASE  &none     &none
+//                               └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+        fun_layer {
+            bindings = <
+//              ┌────────────┬────────────┬────────────┬────────────┬────────────┐    ┌────────────┬────────────┬────────────┬────────────┬────────────┐
+                 &kp F12      &kp F7       &kp F8       &kp F9       &kp LS(LG(N5))  &kp C_BRI_DEC &kp C_BRI_INC &rgb_ug RGB_BRD &rgb_ug RGB_BRI &bt BT_CLR_ALL
+// ┌────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤    ├────────────┼────────────┼────────────┼────────────┼────────────┼────────────┐
+    &kp LC(LG(X)) &kp F11     &kp F4       &kp F5       &kp F6       &kp LG(SPACE)     &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP &kp C_PP     &bt BT_SEL 1 &kp RC(RG(X))
+// ├────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤    ├────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤
+    &mt GLOBE LC(LG(SPACE)) &kp F10 &kp F1 &kp F2       &kp F3       &siri             &kp RC(RIGHT) &kp RC(DOWN) &kp RC(UP)  &kp RC(LEFT) &bt BT_SEL 0 &sl LOCK
+// └────────────┴────────────┴────────────┼────────────┼────────────┼────────────┤    ├────────────┼────────────┼────────────┼────────────┴────────────┴────────────┘
+                                           &to BASE     &none        &none             &none        &none        &to BASE
+//                                        └────────────┴────────────┴────────────┘    └────────────┴────────────┴────────────┘
+            >;
+        };
+
+        lock_layer {
+            bindings = <
+//           ┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+              &to BASE  &to BASE  &to BASE  &to BASE  &to BASE       &to BASE  &to BASE  &to BASE  &to BASE  &to BASE
+// ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
+    &to BASE  &to BASE  &to BASE  &to BASE  &to BASE  &to BASE       &to BASE  &to BASE  &to BASE  &to BASE  &to BASE  &to BASE
+// ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
+    &to BASE  &to BASE  &to BASE  &to BASE  &to BASE  &to BASE       &to BASE  &to BASE  &to BASE  &to BASE  &to BASE  &to BASE
+// └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
+                                  &to FUN   &to NAV   &to MOUSE      &to SYM   &to NUM   &to FUN
+//                               └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
             >;
         };
     };
