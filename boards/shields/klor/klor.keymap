@@ -32,7 +32,7 @@
 // ┌─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┐
     &kp LSHFT &kp A &mt LCTRL S &mt LALT D &mt LCMD F &kp G          &kp H &mt RCMD J &mt RALT K &mt RCTRL L &kp SEMI  &kp RSHFT
 // ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-    &kp LCMD  &kp Z     &kp X     &kp C     &kp V     &kp B          &kp K     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RCMD
+    &kp LCMD  &kp Z     &kp X     &kp C     &kp V     &kp B          &kp N     &kp M     &kp COMMA &kp DOT   &kp FSLH  &kp RCMD
 // └─────────┴─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┴─────────┘
                         &lt FUN ESC &lt NAV SPACE &lt MOUSE TAB      &lt SYM RET &lt NUM BSPC &lt FUN DEL
 //                               └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
@@ -102,9 +102,9 @@
 //              ┌────────────┬────────────┬────────────┬────────────┬────────────┐    ┌────────────┬────────────┬────────────┬────────────┬────────────┐
                  &kp F12      &kp F7       &kp F8       &kp F9       &kp LS(LG(N5))  &kp C_BRI_DEC &kp C_BRI_INC &rgb_ug RGB_BRD &rgb_ug RGB_BRI &bt BT_CLR_ALL
 // ┌────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤    ├────────────┼────────────┼────────────┼────────────┼────────────┼────────────┐
-    &kp LC(LG(X)) &kp F11     &kp F4       &kp F5       &kp F6       &kp LG(SPACE)     &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP &kp C_PP     &bt BT_SEL 1 &kp RC(RG(X))
+    &kp LC(LG(Q)) &kp F11     &kp F4       &kp F5       &kp F6       &kp LG(SPACE)     &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP &kp C_PP     &bt BT_SEL 1 &kp RC(RG(Q))
 // ├────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤    ├────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤
-    &mt GLOBE LC(LG(SPACE)) &kp F10 &kp F1 &kp F2       &kp F3       &siri             &kp RC(RIGHT) &kp RC(DOWN) &kp RC(UP)  &kp RC(LEFT) &bt BT_SEL 0 &sl LOCK
+    &mt GLOBE LC(LG(SPACE)) &kp F10 &kp F1 &kp F2       &kp F3       &siri             &kp RC(LEFT) &kp RC(DOWN) &kp RC(UP)  &kp RC(RIGHT) &bt BT_SEL 0 &sl LOCK
 // └────────────┴────────────┴────────────┼────────────┼────────────┼────────────┤    ├────────────┼────────────┼────────────┼────────────┴────────────┴────────────┘
                                            &to BASE     &none        &none             &none        &none        &to BASE
 //                                        └────────────┴────────────┴────────────┘    └────────────┴────────────┴────────────┘
