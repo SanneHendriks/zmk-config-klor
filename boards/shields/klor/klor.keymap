@@ -13,8 +13,6 @@
 #define FUN   5
 #define LOCK  6
 
-#define BTD(keycode) &btd keycode 0 // Bluetooth Delay Macro
-
 / {
     behaviors {
         hml: home_row_mod_left {
@@ -39,12 +37,26 @@
             hold-trigger-key-positions = <KEYS_L THUMBS>;
             hold-trigger-on-release;
         };
-        btd: bluetooth_delay {
+        btclrhold: bluetooth_clear_on_hold {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping_term_ms = <1000>;
             flavor = "tap-preferred";
-            bindings = <&bt>, <&none>;
+            bindings = <&btclr_marco>, <&none>;
+        };
+        bt0hold: bluetooth_profile_0_on_hold {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping_term_ms = <1000>;
+            flavor = "tap-preferred";
+            bindings = <&bt0_marco>, <&none>;
+        };
+        bt1hold: bluetooth_profile_1_on_hold {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping_term_ms = <1000>;
+            flavor = "tap-preferred";
+            bindings = <&bt1_marco>, <&none>;
         };
     };
 
@@ -54,6 +66,21 @@
             tap-ms = <1000>;
             #binding-cells = <0>;
             bindings = <&kp LG(SPACE)>;
+        };
+        btclr_marco: bluetooth_clear_marco {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_CLR_ALL>;
+        };
+        bt0_marco: bluetooth_profile_0_marco {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0>;
+        };
+        bt1_marco: bluetooth_profile_1_marco {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 1>;
         };
     };
 
@@ -135,11 +162,11 @@
         fun_layer {
             bindings = <
 //              ┌────────────┬────────────┬────────────┬────────────┬────────────┐    ┌────────────┬────────────┬────────────┬────────────┬────────────┐
-                 &kp F12      &kp F7       &kp F8       &kp F9       &kp LS(LG(N5))  &kp C_BRI_DEC &kp C_BRI_INC &rgb_ug RGB_BRD &rgb_ug RGB_BRI BTD(BT_CLR_ALL)
+                 &kp F12      &kp F7       &kp F8       &kp F9       &kp LS(LG(N5))  &kp C_BRI_DEC &kp C_BRI_INC &rgb_ug RGB_BRD &rgb_ug RGB_BRI &btclrhold 0 0
 // ┌────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤    ├────────────┼────────────┼────────────┼────────────┼────────────┼────────────┐
-    &kp LC(LG(Q)) &kp F11     &kp F4       &kp F5       &kp F6       &kp LG(SPACE)     &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP &kp C_PP     BTD(BT_SEL 1) &kp RC(RG(Q))
+    &kp LC(LG(Q)) &kp F11     &kp F4       &kp F5       &kp F6       &kp LG(SPACE)     &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP &kp C_PP     &bt1hold 0 0 &kp RC(RG(Q))
 // ├────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤    ├────────────┼────────────┼────────────┼────────────┼────────────┼────────────┤
-    &mt GLOBE LC(LG(SPACE)) &kp F10 &kp F1 &kp F2       &kp F3       &siri             &kp RC(LEFT) &kp RC(DOWN) &kp RC(UP)  &kp RC(RIGHT) BTD(BT_SEL 0) &sl LOCK
+    &mt GLOBE LC(LG(SPACE)) &kp F10 &kp F1 &kp F2       &kp F3       &siri             &kp RC(LEFT) &kp RC(DOWN) &kp RC(UP)  &kp RC(RIGHT) &bt0hold 0 0 &sl LOCK
 // └────────────┴────────────┴────────────┼────────────┼────────────┼────────────┤    ├────────────┼────────────┼────────────┼────────────┴────────────┴────────────┘
                                            &to BASE     &trans       &trans            &trans       &trans       &to BASE
 //                                        └────────────┴────────────┴────────────┘    └────────────┴────────────┴────────────┘
